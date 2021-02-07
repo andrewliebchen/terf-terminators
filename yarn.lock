@@ -1523,6 +1523,11 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@pelevesque/is-array-in-array@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@pelevesque/is-array-in-array/-/is-array-in-array-1.0.2.tgz#c4fd01fa3519eb16027c7976a537ed317f9d116e"
+  integrity sha512-WJ5YoSN04sF7VFB1px53s0GbebYpThM0sZi/69bPVJAe1EtMhyMwPuT/r+Yq8vrTZ+iDu8+L8YQgnsTkiIqf2Q==
+
 "@pmmmwh/react-refresh-webpack-plugin@0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.4.3.tgz#1eec460596d200c0236bf195b078a5d1df89b766"

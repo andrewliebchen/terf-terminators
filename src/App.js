@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, Text } from "theme-ui";
 import theme from "./theme";
+import isArrayInArray from "@pelevesque/is-array-in-array";
 
 const gridSize = 5;
 const grassRows = 4;
@@ -36,7 +37,9 @@ const App = () => {
         setY(y < gridSize - 1 ? y + 1 : gridSize - 1);
         break;
       case 13: // enter
-        setDirtPatches([...dirtPatches, [x, y]]);
+        const newPatch = [x, y];
+        isArrayInArray(newPatch, dirtPatches) ||
+          setDirtPatches([...dirtPatches, newPatch]);
         break;
       default:
         return false;

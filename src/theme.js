@@ -17,13 +17,15 @@ const theme = {
     heading: 1.125
   },
   colors: {
-    text: "#000",
+    text: "#fff",
     background: "#fff",
     primary: "#07c",
     secondary: "#30c",
     muted: "#f6f6f6",
-    grass: "#567d46",
-    dirt: "brown"
+    grass: "#41980A",
+    grassAlt: "#45A20B",
+    dirt: "#885A5A",
+    dirtAlt: "#D4AA7D"
   },
   styles: {
     root: {

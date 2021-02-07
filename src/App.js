@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { Box } from "theme-ui";
+import { Box, Text } from "theme-ui";
+import theme from "./theme";
 
 const gridSize = 5;
+const grassRows = 4;
+const grassRowWidth = 100 / (gridSize / 2) / grassRows;
+
+const patchValue = 3.5;
 
 const App = () => {
   const [x, setX] = useState(0);
@@ -38,10 +43,21 @@ const App = () => {
     }
   };
 
-  console.log(dirtPatches);
-
   return (
-    <Box sx={{ bg: "grass", width: "100vw", height: "100vh" }}>
+    <Box
+      sx={{
+        width: "100vw",
+        height: "100vh",
+        backgroundSize: `${grassRowWidth}vw`,
+        backgroundImage: `repeating-linear-gradient(
+          90deg,
+          ${theme.colors.grass},
+          ${theme.colors.grass} ${grassRowWidth / 2}vw,
+          ${theme.colors.grassAlt} ${grassRowWidth / 2}vw,
+          ${theme.colors.grassAlt} ${grassRowWidth}vw
+        )`
+      }}
+    >
       <input
         autoFocus
         onKeyDown={event => keyCodeListener(event.keyCode)}
@@ -60,7 +76,8 @@ const App = () => {
             ...patchStyles,
             bg: "dirt",
             top: `${getCoordinates(patch[1])}vh`,
-            left: `${getCoordinates(patch[0])}vw`
+            left: `${getCoordinates(patch[0])}vw`,
+            bg: "dirt"
           }}
         />
       ))}
@@ -74,6 +91,19 @@ const App = () => {
           borderColor: "white"
         }}
       />
+
+      <Text
+        sx={{
+          position: "fixed",
+          bottom: 4,
+          left: 4,
+          color: "text",
+          fontWeight: "bold",
+          fontSize: 5
+        }}
+      >
+        ${(dirtPatches.length * patchValue).toFixed(2)}
+      </Text>
     </Box>
   );
 };

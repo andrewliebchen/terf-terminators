@@ -21,7 +21,9 @@ const theme = {
     background: "#fff",
     primary: "#07c",
     secondary: "#30c",
-    muted: "#f6f6f6"
+    muted: "#f6f6f6",
+    grass: "#567d46",
+    dirt: "brown"
   },
   styles: {
     root: {

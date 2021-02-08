@@ -27,6 +27,18 @@ const theme = {
     dirt: "#885A5A",
     dirtAlt: "#D4AA7D"
   },
+  buttons: {
+    primary: {
+      color: "dirt",
+      bg: "text",
+      fontWeight: "bold",
+      fontSize: 3,
+      borderRadius: 12,
+      px: 4,
+      cursor: "pointer"
+    }
+  },
+  text: { default: { fontSize: 5 } },
   styles: {
     root: {
       fontFamily: "body",

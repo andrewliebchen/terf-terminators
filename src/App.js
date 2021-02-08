@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { Box, Text } from "theme-ui";
+import { useEffect, useState } from "react";
+import { Box, Flex, Text } from "theme-ui";
 import theme from "./theme";
 import isArrayInArray from "@pelevesque/is-array-in-array";
+import { useTimer } from "use-timer";
 
 const gridSize = 5;
 const grassRows = 4;
@@ -13,6 +14,9 @@ const App = () => {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [dirtPatches, setDirtPatches] = useState([[1, 1]]);
+  const { time, start, pause, reset, status } = useTimer();
+
+  useEffect(() => start(), []);
 
   const patchStyles = {
     width: `${100 / gridSize}vw`,
@@ -94,19 +98,22 @@ const App = () => {
           borderColor: "white"
         }}
       />
-
-      <Text
+      <Flex
         sx={{
           position: "fixed",
-          bottom: 4,
-          left: 4,
+          bottom: 0,
+          left: 0,
+          p: 4,
+          gap: 4,
           color: "text",
-          fontWeight: "bold",
           fontSize: 5
         }}
       >
-        ${(dirtPatches.length * patchValue).toFixed(2)}
-      </Text>
+        <Text sx={{ fontWeight: "bold" }}>
+          ${(dirtPatches.length * patchValue).toFixed(2)}
+        </Text>
+        <Text>{time}</Text>
+      </Flex>
     </Box>
   );
 };

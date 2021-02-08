@@ -4,7 +4,7 @@ import { useTimer } from "use-timer";
 import isArrayInArray from "@pelevesque/is-array-in-array";
 import theme from "./theme";
 
-const gridSize = 2;
+const gridSize = 5;
 const grassRows = 4;
 const grassRowWidth = 100 / (gridSize / 2) / grassRows;
 
@@ -27,6 +27,7 @@ const App = () => {
 
   // Track dirt patches, end the game
   const [dirtPatches, setDirtPatches] = useState(dirtInit);
+  const revenue = (dirtPatches.length * patchValue).toFixed(2);
   const keyCodeListener = keyCode => {
     switch (keyCode) {
       case 37: // left
@@ -81,7 +82,8 @@ const App = () => {
     >
       <Text sx={{ fontWeight: "bold" }}>Hasta la vista, baby!</Text>
       <Text sx={{ fontSize: 4 }}>
-        At such speed, you must be a true <b>TerfTerminator</b>!
+        You brought in <b>${revenue}</b> and at such speed! You must be a true{" "}
+        <b>TerfTerminator</b>.
       </Text>
       <Button sx={{ mt: 4 }} onClick={() => resetGame()}>
         Try again
@@ -144,9 +146,7 @@ const App = () => {
           position: "fixed"
         }}
       >
-        <Text sx={{ fontWeight: "bold" }}>
-          ${(dirtPatches.length * patchValue).toFixed(2)}
-        </Text>
+        <Text sx={{ fontWeight: "bold" }}>${revenue}</Text>
         <Text>{time}</Text>
       </Flex>
     </Box>

@@ -29,13 +29,13 @@ const theme = {
   },
   buttons: {
     primary: {
-      color: "dirt",
       bg: "text",
-      fontWeight: "bold",
-      fontSize: 3,
       borderRadius: 12,
-      px: 4,
-      cursor: "pointer"
+      color: "dirt",
+      cursor: "pointer",
+      fontSize: 3,
+      fontWeight: "bold",
+      px: 4
     }
   },
   text: { default: { fontSize: 5 } },

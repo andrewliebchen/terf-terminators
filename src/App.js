@@ -52,7 +52,7 @@ const App = () => {
   };
 
   // Timer
-  const { time, start, reset, pause } = useTimer();
+  const { time, start, reset } = useTimer();
   useEffect(() => start(), [start]);
 
   // Game over
@@ -70,14 +70,13 @@ const App = () => {
   return gameOver ? (
     <Flex
       sx={{
-        bg: "dirt",
         alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        width: "100vw",
-        gap: 3,
+        bg: "dirt",
         flexDirection: "column",
-        p: 5
+        height: "100vh",
+        justifyContent: "center",
+        p: 5,
+        width: "100vw"
       }}
     >
       <Text sx={{ fontWeight: "bold" }}>Hasta la vista, baby!</Text>
@@ -109,8 +108,8 @@ const App = () => {
         style={{
           opacity: 0,
           pointerEvents: "none",
-          zIndex: 1,
-          position: "fixed"
+          position: "fixed",
+          zIndex: 1
         }}
       />
 
@@ -120,8 +119,8 @@ const App = () => {
           sx={{
             ...patchStyles,
             bg: "dirt",
-            top: `${getCoordinates(patch[1])}vh`,
-            left: `${getCoordinates(patch[0])}vw`
+            left: `${getCoordinates(patch[0])}vw`,
+            top: `${getCoordinates(patch[1])}vh`
           }}
         />
       ))}
@@ -129,20 +128,20 @@ const App = () => {
       <Box
         sx={{
           ...patchStyles,
-          top: `${getCoordinates(y)}vh`,
-          left: `${getCoordinates(x)}vw`,
           border: "5px solid",
-          borderColor: "white"
+          borderColor: "white",
+          left: `${getCoordinates(x)}vw`,
+          top: `${getCoordinates(y)}vh`
         }}
       />
       <Flex
         sx={{
-          position: "fixed",
           bottom: 0,
+          color: "text",
+          gap: 4,
           left: 0,
           p: 4,
-          gap: 4,
-          color: "text"
+          position: "fixed"
         }}
       >
         <Text sx={{ fontWeight: "bold" }}>

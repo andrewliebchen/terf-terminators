@@ -58,6 +58,7 @@ const App = () => {
 
   // Game over
   const [gameOver, setGameOver] = useState(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setGameOver(dirtPatches.length === gridSize * gridSize));
 
   const resetGame = () => {

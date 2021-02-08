@@ -14,9 +14,9 @@ const App = () => {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [dirtPatches, setDirtPatches] = useState([[1, 1]]);
-  const { time, start, pause, reset, status } = useTimer();
+  const { time, start, reset } = useTimer();
 
-  useEffect(() => start(), []);
+  useEffect(() => start(), [start]);
 
   const patchStyles = {
     width: `${100 / gridSize}vw`,
@@ -83,8 +83,7 @@ const App = () => {
             ...patchStyles,
             bg: "dirt",
             top: `${getCoordinates(patch[1])}vh`,
-            left: `${getCoordinates(patch[0])}vw`,
-            bg: "dirt"
+            left: `${getCoordinates(patch[0])}vw`
           }}
         />
       ))}

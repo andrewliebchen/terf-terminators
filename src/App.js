@@ -83,7 +83,7 @@ const App = () => {
     >
       <Text sx={{ fontWeight: "bold" }}>Hasta la vista, baby!</Text>
       <Text sx={{ fontSize: 4 }}>
-        You brought in <b>${revenue}</b> and at such speed! You must be a true{" "}
+        You brought in <b>${revenue}</b> in no time! You must be a true{" "}
         <b>TerfTerminator</b>.
       </Text>
       <Button sx={{ mt: 4 }} onClick={() => resetGame()}>

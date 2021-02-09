@@ -6,7 +6,7 @@ import theme from "./theme";
 import TimeFormat from "hh-mm-ss";
 
 const gridSize = 5;
-const grassRows = 4;
+const grassRows = 2;
 const grassRowWidth = 100 / (gridSize / 2) / grassRows;
 
 const patchValue = 3.5;
@@ -14,9 +14,8 @@ const patchValue = 3.5;
 const dirtInit = [[1, 1]];
 
 const patchStyles = {
-  width: `${100 / gridSize}vw`,
-  height: `${100 / gridSize}vh`,
-  position: "fixed"
+  size: `${100 / gridSize}vh`,
+  position: "absolute"
 };
 
 const getCoordinates = value => value * (100 / gridSize);
@@ -27,8 +26,8 @@ const DirtPatch = patch => {
       sx={{
         ...patchStyles,
         bg: "dirt",
-        left: `${getCoordinates(patch[0])}vw`,
-        top: `${getCoordinates(patch[1])}vh`
+        left: `${getCoordinates(patch[0])}%`,
+        top: `${getCoordinates(patch[1])}%`
       }}
     />
   );
@@ -107,17 +106,20 @@ const App = () => {
       </Button>
     </Flex>
   ) : (
-    <Box
+    <Flex
       sx={{
+        alignItems: "center",
+        justifyContent: "center",
         width: "100vw",
         height: "100vh",
-        backgroundSize: `${grassRowWidth}vw`,
+        backgroundPosition: "50% 50%",
+        backgroundSize: `${grassRowWidth}vh`,
         backgroundImage: `repeating-linear-gradient(
           90deg,
           ${theme.colors.grass},
-          ${theme.colors.grass} ${grassRowWidth / 2}vw,
-          ${theme.colors.grassAlt} ${grassRowWidth / 2}vw,
-          ${theme.colors.grassAlt} ${grassRowWidth}vw
+          ${theme.colors.grass} ${grassRowWidth / 2}vh,
+          ${theme.colors.grassAlt} ${grassRowWidth / 2}vh,
+          ${theme.colors.grassAlt} ${grassRowWidth}vh
         )`
       }}
     >
@@ -132,33 +134,44 @@ const App = () => {
         }}
       />
 
-      {dirtPatches.map((patch, i) => (
-        <DirtPatch key={i} {...patch} />
-      ))}
-
       <Box
         sx={{
-          ...patchStyles,
-          border: "5px solid",
-          borderColor: "white",
-          left: `${getCoordinates(x)}vw`,
-          top: `${getCoordinates(y)}vh`
+          size: "100vh",
+          position: "relative",
+          boxShadow: "0 0 0 1000px rgba(0, 0, 0, 0.2)"
         }}
-      />
+      >
+        {dirtPatches.map((patch, i) => (
+          <DirtPatch key={i} {...patch} />
+        ))}
+
+        <Box
+          sx={{
+            ...patchStyles,
+            border: "5px solid",
+            borderColor: "white",
+            left: `${getCoordinates(x)}%`,
+            top: `${getCoordinates(y)}%`
+          }}
+        />
+      </Box>
       <Flex
         sx={{
           bottom: 0,
           color: "text",
           gap: 4,
           left: 0,
+          right: 0,
           p: 4,
-          position: "fixed"
+          position: "fixed",
+          justifyContent: "center",
+          fontVariantNumeric: "tabular-nums"
         }}
       >
         <Text sx={{ fontWeight: "bold" }}>${revenue}</Text>
         <Text>{TimeFormat.fromS(time, "mm:ss")}</Text>
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 

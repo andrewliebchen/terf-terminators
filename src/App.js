@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useTimer } from "use-timer";
 import isArrayInArray from "@pelevesque/is-array-in-array";
 import theme from "./theme";
+import TimeFormat from "hh-mm-ss";
 
 const gridSize = 5;
 const grassRows = 4;
@@ -66,7 +67,9 @@ const App = () => {
   };
 
   // Timer
-  const { time, start, reset } = useTimer();
+  const { time, start, reset } = useTimer({
+    interval: 1000
+  });
   useEffect(() => start(), [start]);
 
   // Game over
@@ -153,7 +156,7 @@ const App = () => {
         }}
       >
         <Text sx={{ fontWeight: "bold" }}>${revenue}</Text>
-        <Text>{time}</Text>
+        <Text>{TimeFormat.fromS(time, "mm:ss")}</Text>
       </Flex>
     </Box>
   );

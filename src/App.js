@@ -20,6 +20,19 @@ const patchStyles = {
 
 const getCoordinates = value => value * (100 / gridSize);
 
+const DirtPatch = patch => {
+  return (
+    <Box
+      sx={{
+        ...patchStyles,
+        bg: "dirt",
+        left: `${getCoordinates(patch[0])}vw`,
+        top: `${getCoordinates(patch[1])}vh`
+      }}
+    />
+  );
+};
+
 const App = () => {
   // Cursor
   const [x, setX] = useState(0);
@@ -117,15 +130,7 @@ const App = () => {
       />
 
       {dirtPatches.map((patch, i) => (
-        <Box
-          key={i}
-          sx={{
-            ...patchStyles,
-            bg: "dirt",
-            left: `${getCoordinates(patch[0])}vw`,
-            top: `${getCoordinates(patch[1])}vh`
-          }}
-        />
+        <DirtPatch key={i} {...patch} />
       ))}
 
       <Box

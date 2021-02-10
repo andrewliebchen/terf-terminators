@@ -4,34 +4,18 @@ import { useTimer } from "use-timer";
 import isArrayInArray from "@pelevesque/is-array-in-array";
 import theme from "./theme";
 import TimeFormat from "hh-mm-ss";
+import DirtPatch from "./DirtPatch";
 
 const gridSize = 5;
 const grassRows = 2;
 const grassRowWidth = 100 / (gridSize / 2) / grassRows;
 
+const patchSize = `${100 / gridSize}vh`;
 const patchValue = 3.5;
 
 const dirtInit = [[1, 1]];
 
-const patchStyles = {
-  size: `${100 / gridSize}vh`,
-  position: "absolute"
-};
-
 const getCoordinates = value => value * (100 / gridSize);
-
-const DirtPatch = patch => {
-  return (
-    <Box
-      sx={{
-        ...patchStyles,
-        bg: "dirt",
-        left: `${getCoordinates(patch[0])}%`,
-        top: `${getCoordinates(patch[1])}%`
-      }}
-    />
-  );
-};
 
 const App = () => {
   // Cursor
@@ -142,12 +126,20 @@ const App = () => {
         }}
       >
         {dirtPatches.map((patch, i) => (
-          <DirtPatch key={i} {...patch} />
+          <DirtPatch
+            key={i}
+            size={patchSize}
+            x={getCoordinates(patch[0])}
+            y={getCoordinates(patch[1])}
+            index={i}
+            value={patchValue}
+          />
         ))}
 
         <Box
           sx={{
-            ...patchStyles,
+            size: patchSize,
+            position: "absolute",
             border: "5px solid",
             borderColor: "white",
             left: `${getCoordinates(x)}%`,

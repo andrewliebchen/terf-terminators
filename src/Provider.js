@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTimer } from "use-timer";
 import Context from "./Context";
 
-const gridSize = 5;
+const gridSize = 3;
 const patchValue = 3.5;
 
 const Provider = props => {

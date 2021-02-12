@@ -1,4 +1,4 @@
-import { Button, Box, Flex, Text } from "theme-ui";
+import { Box, Flex, Text } from "theme-ui";
 import { useContext } from "react";
 import theme from "./theme";
 import TimeFormat from "hh-mm-ss";
@@ -6,43 +6,25 @@ import DirtPatch from "./DirtPatch";
 import House from "./House";
 import KeyCodeListener from "./KeyCodeListener";
 import Context from "./Context";
+import Cursor from "./Cursor";
+import GameOver from "./GameOver";
 
 const App = () => {
-  const {
-    cursor,
-    gameOver,
-    revenue,
-    resetGame,
-    dirtPatches,
-    getCoordinates,
-    patch,
-    time,
-    gridSize
-  } = useContext(Context);
+  const { gameOver, revenue, dirtPatches, time, gridSize } = useContext(
+    Context
+  );
 
   const grassRowWidth = 100 / (gridSize / 2) / 2;
+  const grassBackground = `repeating-linear-gradient(
+    90deg,
+    ${theme.colors.grass},
+    ${theme.colors.grass} ${grassRowWidth / 2}vh,
+    ${theme.colors.grassAlt} ${grassRowWidth / 2}vh,
+    ${theme.colors.grassAlt} ${grassRowWidth}vh
+  )`;
 
   return gameOver ? (
-    <Flex
-      sx={{
-        alignItems: "center",
-        bg: "dirt",
-        flexDirection: "column",
-        height: "100vh",
-        justifyContent: "center",
-        p: 5,
-        width: "100vw"
-      }}
-    >
-      <Text sx={{ fontWeight: "bold" }}>Hasta la vista, baby!</Text>
-      <Text sx={{ fontSize: 4 }}>
-        You brought in <b>${revenue}</b> in no time! You must be a true{" "}
-        <b>TerfTerminator</b>.
-      </Text>
-      <Button sx={{ mt: 4 }} onClick={resetGame}>
-        Try again
-      </Button>
-    </Flex>
+    <GameOver />
   ) : (
     <Flex
       sx={{
@@ -52,13 +34,7 @@ const App = () => {
         height: "100vh",
         backgroundPosition: "50% 50%",
         backgroundSize: `${grassRowWidth}vh`,
-        backgroundImage: `repeating-linear-gradient(
-          90deg,
-          ${theme.colors.grass},
-          ${theme.colors.grass} ${grassRowWidth / 2}vh,
-          ${theme.colors.grassAlt} ${grassRowWidth / 2}vh,
-          ${theme.colors.grassAlt} ${grassRowWidth}vh
-        )`
+        backgroundImage: grassBackground
       }}
     >
       <Box
@@ -71,19 +47,9 @@ const App = () => {
         {dirtPatches.map((patch, i) => (
           <DirtPatch key={i} index={i} patch={patch} />
         ))}
-
-        <Box
-          sx={{
-            size: patch.size,
-            position: "absolute",
-            border: "5px solid",
-            borderColor: "white",
-            left: `${getCoordinates(cursor.x)}%`,
-            top: `${getCoordinates(cursor.y)}%`
-          }}
-        />
+        <Cursor />
       </Box>
-      <House />
+      {/* <House /> */}
       <Flex
         sx={{
           bottom: 0,

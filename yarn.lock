@@ -9194,6 +9194,11 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
+pure-random-number@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/pure-random-number/-/pure-random-number-2.1.0.tgz#8ce268f4d4cd2109d85a0bc24fd4c58916be8280"
+  integrity sha512-XTJIYJ0dwpMk6yf+Uzho9qadDp6Y1V+5RS3Dv9r/0WLr8/KZjDxRrMopvxYxsSHNGlULlfE93bqGOX1PiRFzOw==
+
 q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"

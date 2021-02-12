@@ -1,8 +1,8 @@
 import { Box } from "theme-ui";
+import { shallowEqualArrays } from "shallow-equal";
 import { useContext } from "react";
 import Context from "./Context";
 import isArrayInArray from "@pelevesque/is-array-in-array";
-import { shallowEqualArrays } from "shallow-equal";
 
 const Cursor = props => {
   const {

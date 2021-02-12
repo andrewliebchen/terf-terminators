@@ -1,21 +1,35 @@
 import { useEffect, useState } from "react";
 import { useTimer } from "use-timer";
 import Context from "./Context";
+import { randomSync } from "pure-random-number";
+import { shallowEqualArrays } from "shallow-equal";
 
 const gridSize = 5;
 const patchValue = 3.5;
+
+const randomCoordinates = (exclude = [0, 0], min = 0, max = gridSize - 1) => {
+  const generate = () => randomSync(min, max);
+  const generateCoordinates = () => [generate(), generate()];
+  const coordinates = generateCoordinates();
+
+  return !shallowEqualArrays(coordinates, exclude)
+    ? coordinates
+    : generateCoordinates();
+};
+
+console.log(randomCoordinates());
 
 const Provider = props => {
   // Cursor
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
-  // House
-  const [housePosition, setHousePosition] = useState([1, 0]);
-
   // Track dirt patches, end the game
   const dirtInit = [[1, 1]];
   const [dirtPatches, setDirtPatches] = useState(dirtInit);
+
+  // House
+  const [housePosition] = useState(randomCoordinates(dirtInit, 1));
 
   // Timer
   const { time, start, reset } = useTimer({

@@ -25,7 +25,9 @@ const theme = {
     grass: "#41980A",
     grassAlt: "#45A20B",
     dirt: "#885A5A",
-    dirtAlt: "#D4AA7D"
+    dirtAlt: "#D4AA7D",
+    roof: "#111",
+    roofAlt: "#333"
   },
   buttons: {
     primary: {

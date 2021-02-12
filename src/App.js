@@ -1,10 +1,11 @@
 import { Button, Box, Flex, Text } from "theme-ui";
 import { useEffect, useState } from "react";
 import { useTimer } from "use-timer";
-import isArrayInArray from "@pelevesque/is-array-in-array";
 import theme from "./theme";
 import TimeFormat from "hh-mm-ss";
 import DirtPatch from "./DirtPatch";
+import House from "./House";
+import KeyCodeListener from "./KeyCodeListener";
 
 const gridSize = 5;
 const grassRows = 2;
@@ -25,29 +26,6 @@ const App = () => {
   // Track dirt patches, end the game
   const [dirtPatches, setDirtPatches] = useState(dirtInit);
   const revenue = (dirtPatches.length * patchValue).toFixed(2);
-  const keyCodeListener = keyCode => {
-    switch (keyCode) {
-      case 37: // left
-        setX(x > 0 ? x - 1 : 0);
-        break;
-      case 38: // up
-        setY(Math.max(0, y - 1));
-        break;
-      case 39: // right
-        setX(x < gridSize - 1 ? x + 1 : gridSize - 1);
-        break;
-      case 40: // down
-        setY(y < gridSize - 1 ? y + 1 : gridSize - 1);
-        break;
-      case 13: // enter
-        const newPatch = [x, y];
-        isArrayInArray(newPatch, dirtPatches) ||
-          setDirtPatches([...dirtPatches, newPatch]);
-        break;
-      default:
-        return false;
-    }
-  };
 
   // Timer
   const { time, start, reset } = useTimer({
@@ -107,17 +85,6 @@ const App = () => {
         )`
       }}
     >
-      <input
-        autoFocus
-        onKeyDown={event => keyCodeListener(event.keyCode)}
-        style={{
-          opacity: 0,
-          pointerEvents: "none",
-          position: "fixed",
-          zIndex: 1
-        }}
-      />
-
       <Box
         sx={{
           size: "100vh",
@@ -147,6 +114,7 @@ const App = () => {
           }}
         />
       </Box>
+      <House />
       <Flex
         sx={{
           bottom: 0,
@@ -163,6 +131,15 @@ const App = () => {
         <Text sx={{ fontWeight: "bold" }}>${revenue}</Text>
         <Text>{TimeFormat.fromS(time, "mm:ss")}</Text>
       </Flex>
+      <KeyCodeListener
+        x={x}
+        y={y}
+        setX={setX}
+        setY={setY}
+        dirtPatches={dirtPatches}
+        gridSize={gridSize}
+        setDirtPatches={setDirtPatches}
+      />
     </Flex>
   );
 };

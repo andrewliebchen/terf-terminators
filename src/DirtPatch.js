@@ -1,21 +1,22 @@
 import { Flex, Text } from "theme-ui";
 import { keyframes } from "@emotion/react";
-
-const fadeIn = keyframes({
-  "0%": { opacity: 1, transform: "translateY(10px)" },
-  "70%": { opacity: 1, transform: "translateY(-70px)" },
-  "100%": { opacity: 0, transform: "translateY(-150px)" }
-});
+import { useContext } from "react";
+import Context from "./Context";
 
 const DirtPatch = props => {
+  const { patchSize, getCoordinates, patchValue } = useContext(Context);
+
+  const x = getCoordinates(props.patch[0]);
+  const y = getCoordinates(props.patch[1]);
+
   return (
     <Flex
       sx={{
-        size: props.size,
+        size: patchSize,
         position: "absolute",
         bg: "dirt",
-        left: `${props.x}%`,
-        top: `${props.y}%`,
+        left: `${x}%`,
+        top: `${y}%`,
         justifyContent: "center",
         alignItems: "center"
       }}
@@ -23,13 +24,17 @@ const DirtPatch = props => {
       {props.index > 0 && (
         <Text
           sx={{
-            animationName: fadeIn,
+            animationName: keyframes({
+              "0%": { opacity: 1, transform: "translateY(10px)" },
+              "70%": { opacity: 1, transform: "translateY(-70px)" },
+              "100%": { opacity: 0, transform: "translateY(-150px)" }
+            }),
             animationDuration: "1.2s",
             animationFillMode: "forwards",
             fontWeight: "bold"
           }}
         >
-          +${props.value.toFixed(2)}
+          +${patchValue.toFixed(2)}
         </Text>
       )}
     </Flex>

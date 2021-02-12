@@ -1,7 +1,17 @@
+import { useContext } from "react";
+import Context from "./Context";
 import isArrayInArray from "@pelevesque/is-array-in-array";
 
 const KeyCodeListener = props => {
-  const { x, y, gridSize, setDirtPatches, dirtPatches, setX, setY } = props;
+  const {
+    dirtPatches,
+    gridSize,
+    setDirtPatches,
+    setX,
+    setY,
+    x,
+    y
+  } = useContext(Context);
 
   const keyCodeListener = keyCode => {
     switch (keyCode) {

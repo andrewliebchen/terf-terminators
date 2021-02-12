@@ -1,50 +1,29 @@
 import { Button, Box, Flex, Text } from "theme-ui";
-import { useEffect, useState } from "react";
-import { useTimer } from "use-timer";
+import { useContext } from "react";
 import theme from "./theme";
 import TimeFormat from "hh-mm-ss";
 import DirtPatch from "./DirtPatch";
 import House from "./House";
 import KeyCodeListener from "./KeyCodeListener";
-
-const gridSize = 5;
-const grassRows = 2;
-const grassRowWidth = 100 / (gridSize / 2) / grassRows;
-
-const patchSize = `${100 / gridSize}vh`;
-const patchValue = 3.5;
-
-const dirtInit = [[1, 1]];
-
-const getCoordinates = value => value * (100 / gridSize);
+import Context from "./Context";
 
 const App = () => {
-  // Cursor
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-
-  // Track dirt patches, end the game
-  const [dirtPatches, setDirtPatches] = useState(dirtInit);
-  const revenue = (dirtPatches.length * patchValue).toFixed(2);
-
-  // Timer
-  const { time, start, reset } = useTimer({
-    interval: 1000
-  });
-  useEffect(() => start(), [start]);
-
-  // Game over
-  const [gameOver, setGameOver] = useState(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => setGameOver(dirtPatches.length === gridSize * gridSize));
-
-  const resetGame = () => {
-    setGameOver(false);
-    setDirtPatches(dirtInit);
-    setX(0);
-    setY(0);
-    reset();
-  };
+  const {
+    gridSize,
+    grassRowWidth,
+    patchSize,
+    getCoordinates,
+    x,
+    y,
+    setX,
+    setY,
+    dirtPatches,
+    setDirtPatches,
+    revenue,
+    time,
+    gameOver,
+    resetGame
+  } = useContext(Context);
 
   return gameOver ? (
     <Flex
@@ -93,14 +72,7 @@ const App = () => {
         }}
       >
         {dirtPatches.map((patch, i) => (
-          <DirtPatch
-            key={i}
-            size={patchSize}
-            x={getCoordinates(patch[0])}
-            y={getCoordinates(patch[1])}
-            index={i}
-            value={patchValue}
-          />
+          <DirtPatch key={i} index={i} patch={patch} />
         ))}
 
         <Box

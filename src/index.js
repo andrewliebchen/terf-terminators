@@ -4,14 +4,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "theme-ui";
 import theme from "./theme";
-import Provider from "./Provider";
+import AppProvider from "./Provider";
 
 ReactDOM.render(
-  <Provider>
+  <AppProvider>
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
-  </Provider>,
+  </AppProvider>,
   document.getElementById("root")
 );
 

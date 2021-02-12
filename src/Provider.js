@@ -2,25 +2,17 @@ import { useEffect, useState } from "react";
 import { useTimer } from "use-timer";
 import Context from "./Context";
 
+const gridSize = 5;
+const patchValue = 3.5;
+
 const Provider = props => {
-  const gridSize = 5;
-  const grassRows = 2;
-  const grassRowWidth = 100 / (gridSize / 2) / grassRows;
-
-  const patchSize = `${100 / gridSize}vh`;
-  const patchValue = 3.5;
-
-  const dirtInit = [[1, 1]];
-
-  const getCoordinates = value => value * (100 / gridSize);
-
   // Cursor
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
   // Track dirt patches, end the game
+  const dirtInit = [[1, 1]];
   const [dirtPatches, setDirtPatches] = useState(dirtInit);
-  const revenue = (dirtPatches.length * patchValue).toFixed(2);
 
   // Timer
   const { time, start, reset } = useTimer({
@@ -33,33 +25,30 @@ const Provider = props => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setGameOver(dirtPatches.length === gridSize * gridSize));
 
-  const resetGame = () => {
-    setGameOver(false);
-    setDirtPatches(dirtInit);
-    setX(0);
-    setY(0);
-    reset();
-  };
-
   return (
     <Context.Provider
       value={{
         ...props,
         dirtPatches,
         gameOver,
-        getCoordinates,
-        grassRowWidth,
-        gridSize,
-        patchSize,
-        patchValue,
-        resetGame,
-        revenue,
         setDirtPatches,
-        setX,
-        setY,
+        setGameOver,
         time,
-        x,
-        y
+        gridSize,
+        patch: {
+          size: `${100 / gridSize}vh`,
+          value: patchValue
+        },
+        cursor: { x, setX, y, setY },
+        revenue: (dirtPatches.length * patchValue).toFixed(2),
+        getCoordinates: value => value * (100 / gridSize),
+        resetGame: () => {
+          setGameOver(false);
+          setDirtPatches(dirtInit);
+          setX(0);
+          setY(0);
+          reset();
+        }
       }}
     >
       {props.children}

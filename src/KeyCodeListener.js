@@ -3,32 +3,24 @@ import Context from "./Context";
 import isArrayInArray from "@pelevesque/is-array-in-array";
 
 const KeyCodeListener = props => {
-  const {
-    dirtPatches,
-    gridSize,
-    setDirtPatches,
-    setX,
-    setY,
-    x,
-    y
-  } = useContext(Context);
+  const { dirtPatches, gridSize, setDirtPatches, cursor } = useContext(Context);
 
   const keyCodeListener = keyCode => {
     switch (keyCode) {
       case 37: // left
-        setX(x > 0 ? x - 1 : 0);
+        cursor.setX(cursor.x > 0 ? cursor.x - 1 : 0);
         break;
       case 38: // up
-        setY(Math.max(0, y - 1));
+        cursor.setY(Math.max(0, cursor.y - 1));
         break;
       case 39: // right
-        setX(x < gridSize - 1 ? x + 1 : gridSize - 1);
+        cursor.setX(cursor.x < gridSize - 1 ? cursor.x + 1 : gridSize - 1);
         break;
       case 40: // down
-        setY(y < gridSize - 1 ? y + 1 : gridSize - 1);
+        cursor.setY(cursor.y < gridSize - 1 ? cursor.y + 1 : gridSize - 1);
         break;
       case 13: // enter
-        const newPatch = [x, y];
+        const newPatch = [cursor.x, cursor.y];
         isArrayInArray(newPatch, dirtPatches) ||
           setDirtPatches([...dirtPatches, newPatch]);
         break;

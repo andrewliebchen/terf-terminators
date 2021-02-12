@@ -9,21 +9,18 @@ import Context from "./Context";
 
 const App = () => {
   const {
-    gridSize,
-    grassRowWidth,
-    patchSize,
-    getCoordinates,
-    x,
-    y,
-    setX,
-    setY,
-    dirtPatches,
-    setDirtPatches,
-    revenue,
-    time,
+    cursor,
     gameOver,
-    resetGame
+    revenue,
+    resetGame,
+    dirtPatches,
+    getCoordinates,
+    patch,
+    time,
+    gridSize
   } = useContext(Context);
+
+  const grassRowWidth = 100 / (gridSize / 2) / 2;
 
   return gameOver ? (
     <Flex
@@ -42,7 +39,7 @@ const App = () => {
         You brought in <b>${revenue}</b> in no time! You must be a true{" "}
         <b>TerfTerminator</b>.
       </Text>
-      <Button sx={{ mt: 4 }} onClick={() => resetGame()}>
+      <Button sx={{ mt: 4 }} onClick={resetGame}>
         Try again
       </Button>
     </Flex>
@@ -77,12 +74,12 @@ const App = () => {
 
         <Box
           sx={{
-            size: patchSize,
+            size: patch.size,
             position: "absolute",
             border: "5px solid",
             borderColor: "white",
-            left: `${getCoordinates(x)}%`,
-            top: `${getCoordinates(y)}%`
+            left: `${getCoordinates(cursor.x)}%`,
+            top: `${getCoordinates(cursor.y)}%`
           }}
         />
       </Box>
@@ -103,15 +100,7 @@ const App = () => {
         <Text sx={{ fontWeight: "bold" }}>${revenue}</Text>
         <Text>{TimeFormat.fromS(time, "mm:ss")}</Text>
       </Flex>
-      <KeyCodeListener
-        x={x}
-        y={y}
-        setX={setX}
-        setY={setY}
-        dirtPatches={dirtPatches}
-        gridSize={gridSize}
-        setDirtPatches={setDirtPatches}
-      />
+      <KeyCodeListener />
     </Flex>
   );
 };

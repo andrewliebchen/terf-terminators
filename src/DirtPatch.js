@@ -4,7 +4,7 @@ import { useContext } from "react";
 import Context from "./Context";
 
 const DirtPatch = props => {
-  const { patchSize, getCoordinates, patchValue } = useContext(Context);
+  const { patch, getCoordinates } = useContext(Context);
 
   const x = getCoordinates(props.patch[0]);
   const y = getCoordinates(props.patch[1]);
@@ -12,7 +12,7 @@ const DirtPatch = props => {
   return (
     <Flex
       sx={{
-        size: patchSize,
+        size: patch.size,
         position: "absolute",
         bg: "dirt",
         left: `${x}%`,
@@ -34,7 +34,7 @@ const DirtPatch = props => {
             fontWeight: "bold"
           }}
         >
-          +${patchValue.toFixed(2)}
+          +${patch.value.toFixed(2)}
         </Text>
       )}
     </Flex>

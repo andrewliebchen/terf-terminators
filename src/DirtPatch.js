@@ -6,17 +6,14 @@ import Context from "./Context";
 const DirtPatch = props => {
   const { patch, getCoordinates } = useContext(Context);
 
-  const x = getCoordinates(props.patch[0]);
-  const y = getCoordinates(props.patch[1]);
-
   return (
     <Flex
       sx={{
         size: patch.size,
         position: "absolute",
         bg: "dirt",
-        left: `${x}%`,
-        top: `${y}%`,
+        left: getCoordinates(props.patch[0]),
+        top: getCoordinates(props.patch[1]),
         justifyContent: "center",
         alignItems: "center"
       }}

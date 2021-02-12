@@ -4,7 +4,6 @@ import theme from "./theme";
 import TimeFormat from "hh-mm-ss";
 import DirtPatch from "./DirtPatch";
 import House from "./House";
-import KeyCodeListener from "./KeyCodeListener";
 import Context from "./Context";
 import Cursor from "./Cursor";
 import GameOver from "./GameOver";
@@ -47,9 +46,9 @@ const App = () => {
         {dirtPatches.map((patch, i) => (
           <DirtPatch key={i} index={i} patch={patch} />
         ))}
+        <House />
         <Cursor />
       </Box>
-      {/* <House /> */}
       <Flex
         sx={{
           bottom: 0,
@@ -66,7 +65,6 @@ const App = () => {
         <Text sx={{ fontWeight: "bold" }}>${revenue}</Text>
         <Text>{TimeFormat.fromS(time, "mm:ss")}</Text>
       </Flex>
-      <KeyCodeListener />
     </Flex>
   );
 };

@@ -4,7 +4,7 @@ import Context from "./Context";
 import theme from "./theme";
 
 const House = props => {
-  const { patch } = useContext(Context);
+  const { patch, housePosition, getCoordinates } = useContext(Context);
 
   return (
     <Flex
@@ -12,8 +12,8 @@ const House = props => {
         size: patch.size,
         position: "absolute",
         backgroundImage: `linear-gradient(to right, ${theme.colors.roof} 50%, ${theme.colors.roofAlt} 50%)`,
-        justifyContent: "center",
-        alignItems: "center"
+        top: getCoordinates(housePosition[1]),
+        left: getCoordinates(housePosition[0])
       }}
     />
   );

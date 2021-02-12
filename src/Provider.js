@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import { useTimer } from "use-timer";
 import Context from "./Context";
 
-const gridSize = 3;
+const gridSize = 5;
 const patchValue = 3.5;
 
 const Provider = props => {
   // Cursor
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
+
+  // House
+  const [housePosition, setHousePosition] = useState([1, 0]);
 
   // Track dirt patches, end the game
   const dirtInit = [[1, 1]];
@@ -31,17 +34,18 @@ const Provider = props => {
         ...props,
         dirtPatches,
         gameOver,
+        gridSize,
+        housePosition,
         setDirtPatches,
         setGameOver,
         time,
-        gridSize,
         patch: {
           size: `${100 / gridSize}vh`,
           value: patchValue
         },
         cursor: { x, setX, y, setY },
         revenue: (dirtPatches.length * patchValue).toFixed(2),
-        getCoordinates: value => value * (100 / gridSize),
+        getCoordinates: value => `${value * (100 / gridSize)}%`,
         resetGame: () => {
           setGameOver(false);
           setDirtPatches(dirtInit);

@@ -33,7 +33,8 @@ const App = () => {
         height: "100vh",
         backgroundPosition: "50% 50%",
         backgroundSize: `${grassRowWidth}vh`,
-        backgroundImage: grassBackground
+        backgroundImage: grassBackground,
+        overflow: "hidden"
       }}
     >
       <Box
